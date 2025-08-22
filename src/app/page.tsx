@@ -16,13 +16,16 @@ const Home = () =>{
   }
   function obterSaudacao(morador: null | Morador){
     if(morador)
-      return formatarNomeMorador(morador)
+      return "Olá, " + formatarNomeMorador(morador)
     return "Olá estranho"
   }
-  const element = <span>Olá mundo, tudo bem?</span>
+  
   return(
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4x1 font-bold">{obterSaudacao(morador)}</h1>
+    <div id="principal" className="min-h-screen flex items-center justify-center bg-black">
+      <div id="componente-azul" className="card-azul">
+        <h1 className="text-2x1 font-bold text-center">{obterSaudacao(morador)}</h1>
+        </div>
+      
     </div>
   )
 }
