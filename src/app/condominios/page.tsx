@@ -6,15 +6,23 @@ import { getCondominios, ICondominio } from '@/services/api-condominios';
 export default function ListaCondominios(){
 
     const [condominios, setCondominios] = useState<ICondominio[]>([])
+    const [loading, setLoading] = useState(true);
+    const [err, setErr] = useState<Error>();
 
     useEffect(()=>
     {
         const buscarCondominios = async () => {
-            const data = await getCondominios()
-            console.log("data" + data)
-            setCondominios(data)
+            try{
+                const response = await getCondominios()
+                console.log("data" + response)
+                setCondominios(response.data)
+            }catch(error){
+                console.log("Erro: " + error)
+                setErr(error);
+            }finally {
+                setLoading(false);
+            }
         }
-
         buscarCondominios()
     }, [])
 
@@ -38,7 +46,17 @@ export default function ListaCondominios(){
             </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-                {condominios.length === 0 ? (
+                { err ? (
+            <tr>
+                <td className="px-4 py-3 text-sm text-red-700" colSpan={7}>
+                    Erro encontrado: {err.message}
+                </td>
+            </tr>) : loading ? (
+            <tr>
+                <td className="px-4 py-3 text-sm text-gray-700" colSpan={7}>
+                    Carregando...
+                </td>
+            </tr>) : condominios.length === 0 ? (
             <tr>
                 <td className="px-4 py-3 text-sm text-gray-700" colSpan={7}>
                     Nenhum condominio encontrado.

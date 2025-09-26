@@ -10,8 +10,11 @@ export interface ICondominio{
 }
 
 export const getCondominios = async () => {
-    const response = await fetch('https://raw.githubusercontent.com/vagner107/viva-condo/refs/heads/main/src/app/condominios/api_condominio.json') 
+    const response = await fetch("/api/condominios",{cache: "no-store"});
+    //'https://raw.githubusercontent.com/vagner107/viva-condo/refs/heads/main/src/app/condominios/api_condominio.json') 
     // https://fatec.short.gy/condominios
 
-    return await response.json()
+    const{data, success, count, error} = await response.json();
+    if(error) throw new Error(error);
+    return {data, success, count, error};
 }
