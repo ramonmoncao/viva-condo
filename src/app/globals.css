@@ -2,7 +2,11 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+}
+input, textarea, select {
+  background: #ffffff;
+  color: #000000;
 }
 
 @theme inline {

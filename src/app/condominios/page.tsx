@@ -16,7 +16,7 @@ export default function ListaCondominios(){
                 const response = await getCondominios()
                 console.log("data" + response)
                 setCondominios(response.data)
-            }catch(error){
+            }catch(error: any){
                 console.log("Erro: " + error)
                 setErr(error);
             }finally {
